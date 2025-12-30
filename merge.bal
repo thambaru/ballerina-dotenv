@@ -1,5 +1,3 @@
-// Copyright (c) 2024, thambaru. All Rights Reserved.
-
 # Merges multiple configuration sources according to precedence order
 #
 # + sources - The list of configuration sources

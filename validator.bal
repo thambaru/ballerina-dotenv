@@ -1,5 +1,3 @@
-// Copyright (c) 2024, thambaru. All Rights Reserved.
-
 # Checks if a field name indicates a sensitive value
 #
 # + fieldName - The name of the field to check

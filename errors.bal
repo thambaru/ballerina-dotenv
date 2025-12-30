@@ -1,5 +1,3 @@
-// Copyright (c) 2024, thambaru. All Rights Reserved.
-
 # Configuration loading error
 public type ConfigError distinct error;
 

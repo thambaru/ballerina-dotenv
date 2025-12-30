@@ -1,5 +1,3 @@
-// Copyright (c) 2024, thambaru. All Rights Reserved.
-
 import ballerina/io;
 
 public function main() returns error? {

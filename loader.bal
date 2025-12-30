@@ -1,5 +1,3 @@
-// Copyright (c) 2024, thambaru. All Rights Reserved.
-
 import ballerina/io;
 import ballerina/os;
 import ballerina/file;

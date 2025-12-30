@@ -217,4 +217,5 @@ type DatabaseConfig record {|
 
 ## License
 
-Copyright (c) 2024, thambaru. All Rights Reserved.
+MIT License
+Copyright (c) 2025, thambaru. All Rights Reserved.

@@ -1,5 +1,3 @@
-// Copyright (c) 2024, thambaru. All Rights Reserved.
-
 # Configuration loading options
 #
 # + envPrefix - Prefix for environment variables (e.g. `APP_`)
