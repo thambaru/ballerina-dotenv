@@ -1,5 +1,5 @@
 name: Build Check
-run-name: "Build Check: ${{ github.event_name == 'workflow_dispatch' && format('PR #{0}', github.event.inputs.pr_number) || github.head_ref }}"
+run-name: "Build Check: ${{ github.event_name == 'workflow_dispatch' && format('PR #{0}', github.event.inputs.pr_number) || github.event_name == 'push' && github.event.head_commit.message || github.head_ref }}"
 
 on:
   push:
