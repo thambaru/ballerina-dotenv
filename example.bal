@@ -3,13 +3,13 @@
 import ballerina/io;
 
 // Example configuration record
-type AppConfig record {|
+type AppConfig record {
     string databaseHost = "localhost";
     int databasePort = 5432;
     string databaseUsername;
     string databasePassword;
     string logLevel = "INFO";
-|};
+};
 
 public function example() returns error? {
     io:println("=== dotenv Configuration Loading Example ===");

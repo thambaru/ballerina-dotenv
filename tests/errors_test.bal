@@ -8,7 +8,7 @@ function testCreateConfigError() {
     ConfigError err = createConfigError(message);
     
     test:assertEquals(err.message(), message, "Error message should match input");
-    test:assertTrue(err is ConfigError, "Should be of type ConfigError");
+
 }
 
 @test:Config {}
@@ -18,7 +18,7 @@ function testCreateMissingFieldError() {
     
     string expectedMessage = string `Missing required config field '${fieldName}'`;
     test:assertEquals(err.message(), expectedMessage, "Error message should include field name");
-    test:assertTrue(err is ConfigError, "Should be of type ConfigError");
+
 }
 
 @test:Config {}
@@ -31,15 +31,14 @@ function testCreateTypeMismatchError() {
     
     string expectedMessage = string `Invalid type for field '${fieldName}'. Expected ${expectedType}, found ${actualValue}`;
     test:assertEquals(err.message(), expectedMessage, "Error message should include all details");
-    test:assertTrue(err is ConfigError, "Should be of type ConfigError");
+
 }
 
 @test:Config {}
 function testConfigErrorDistinctType() {
-    ConfigError configErr = createConfigError("Config error");
     error genericErr = error("Generic error");
     
-    test:assertTrue(configErr is ConfigError, "Should be ConfigError type");
+    // test:assertTrue(configErr is ConfigError, "Should be ConfigError type");
     test:assertFalse(genericErr is ConfigError, "Generic error should not be ConfigError type");
 }
 
@@ -74,7 +73,7 @@ function testMultipleErrorCreation() {
     test:assertEquals(errors.length(), 3, "Should create multiple distinct errors");
     
     foreach ConfigError err in errors {
-        test:assertTrue(err is ConfigError, "All errors should be ConfigError type");
+        // test:assertTrue(err is ConfigError, "All errors should be ConfigError type");
         test:assertTrue(err.message().length() > 0, "All errors should have non-empty messages");
     }
 }

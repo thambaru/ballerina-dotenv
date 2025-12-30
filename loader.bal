@@ -6,6 +6,10 @@ import ballerina/file;
 import ballerina/toml;
 
 # Loads configuration from multiple sources and maps to target type
+#
+# + targetType - The target record type description
+# + options - The loading options
+# + return - The loaded configuration or an error
 public function loadConfig(typedesc<anydata> targetType, LoadOptions options = {}) returns anydata|ConfigError {
     // Load from all sources
     ConfigSource[] sources_array = [];
@@ -55,6 +59,8 @@ public function loadConfig(typedesc<anydata> targetType, LoadOptions options = {
 }
 
 # Prints configuration with sensitive values masked
+#
+# + config - The configuration to print
 public function printSafe(anydata config) {
     if config is map<anydata> {
         map<anydata> masked = maskSensitiveValues(config);
@@ -65,6 +71,9 @@ public function printSafe(anydata config) {
 }
 
 # Checks if an error is a file not found error
+#
+# + err - The error to check
+# + return - True if the error is a file not found error
 function isFileNotFoundError(error err) returns boolean {
     string message = err.message();
     return message.includes("No such file") || 
@@ -73,6 +82,9 @@ function isFileNotFoundError(error err) returns boolean {
 }
 
 # Loads configuration from environment variables
+#
+# + prefix - The prefix to filter environment variables
+# + return - A map of configuration values or an error
 function loadFromEnv(string prefix = "") returns map<anydata>|error {
     map<anydata> config = {};
     
@@ -103,6 +115,9 @@ function loadFromEnv(string prefix = "") returns map<anydata>|error {
 }
 
 # Loads configuration from a .env file
+#
+# + filePath - The path to the .env file
+# + return - A map of configuration values or an error
 function loadFromDotenv(string filePath = ".env") returns map<anydata>|error {
     map<anydata> config = {};
     
@@ -157,6 +172,9 @@ function loadFromDotenv(string filePath = ".env") returns map<anydata>|error {
 }
 
 # Loads configuration from a Config.toml file
+#
+# + filePath - The path to the Config.toml file
+# + return - A map of configuration values or an error
 function loadFromToml(string filePath = "Config.toml") returns map<anydata>|error {
     map<anydata> config = {};
     
@@ -174,6 +192,10 @@ function loadFromToml(string filePath = "Config.toml") returns map<anydata>|erro
 }
 
 # Flattens nested TOML data and converts keys to camelCase
+#
+# + data - The TOML data to flatten
+# + prefix - The prefix for nested keys
+# + return - The flattened map
 function flattenTomlData(map<anydata> data, string prefix = "") returns map<anydata> {
     map<anydata> result = {};
     
@@ -199,6 +221,9 @@ function flattenTomlData(map<anydata> data, string prefix = "") returns map<anyd
 }
 
 # Converts SCREAMING_SNAKE_CASE or snake_case to camelCase
+#
+# + input - The input string
+# + return - The camelCase string
 function toCamelCase(string input) returns string {
     string[] parts = re `_`.split(input.toLowerAscii());
     
@@ -219,6 +244,10 @@ function toCamelCase(string input) returns string {
 }
 
 # Converts string values to appropriate types based on target type
+#
+# + config - The configuration map
+# + targetType - The target type description
+# + return - The converted configuration map
 function convertTypes(map<anydata> config, typedesc<anydata> targetType) returns map<anydata> {
     map<anydata> converted = {};
     
@@ -237,6 +266,9 @@ function convertTypes(map<anydata> config, typedesc<anydata> targetType) returns
 }
 
 # Converts a string value to the most appropriate type
+#
+# + value - The string value to convert
+# + return - The converted value
 function convertStringValue(string value) returns anydata {
     // Try to convert to boolean
     if value.toLowerAscii() == "true" {
@@ -263,6 +295,10 @@ function convertStringValue(string value) returns anydata {
 }
 # Filters configuration to only include fields that are known to the target type
 # For now, this removes common unknown fields that might cause conversion errors
+#
+# + config - The configuration map
+# + targetType - The target type description
+# + return - The filtered configuration map
 function filterKnownFields(map<anydata> config, typedesc<anydata> targetType) returns map<anydata> {
     map<anydata> filtered = {};
     

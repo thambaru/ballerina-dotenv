@@ -1,6 +1,9 @@
 // Copyright (c) 2024, thambaru. All Rights Reserved.
 
 # Checks if a field name indicates a sensitive value
+#
+# + fieldName - The name of the field to check
+# + return - True if the field is sensitive, false otherwise
 public function isSensitiveField(string fieldName) returns boolean {
     string lowerName = fieldName.toLowerAscii();
     return lowerName.includes("password") || 
@@ -11,6 +14,9 @@ public function isSensitiveField(string fieldName) returns boolean {
 }
 
 # Masks sensitive values in configuration for safe printing
+#
+# + config - The configuration map
+# + return - The configuration map with sensitive values masked
 public function maskSensitiveValues(map<anydata> config) returns map<anydata> {
     map<anydata> masked = {};
     
